@@ -1,0 +1,123 @@
+import sys
+import numpy as np
+a=[]
+b=[]
+num=0
+path='/home/hadoop/b.txt'
+
+def save_file(path,context):
+    file=open(path,'w')
+    file.write(context)
+    file.close()
+
+
+for line in sys.std.stdin:
+    line=line.strip().split(',')
+    a.append(line)
+for list in a:
+    if num<7:
+        num+=1
+        continue
+    elif list[0][2:8]=='column':
+        b.append(str(list[0][14:]))
+        b.append(str(list[2][7:]))
+print b
+n=np.array(b).reshape(len(b)/2,2)
+np.savetxt('abc.txt',n,fmt='%s',delimiter=',')
+
+
+-----------------------
+下载：wget http://archive.apache.org/dist/thrift/0.9.2/thrift-0.9.2.tar.gz
+安装thrift
+yum install gcc-c++ -y
+yum install boost -y
+#yum install libssl-dev -y
+yum install libevent
+yum install openssl
+./configure
+make&&make install
+
+
+make LUAINC=-I/usr/include/lua5.1/
+$ sudo make install
+
+------------------
+#!/usr/local/bin/python3
+import sys
+import numpy as np
+import time
+a=[]
+b=[]
+c=[]
+num=0
+path='/home/hadoop/b.txt'
+for line in sys.stdin:
+    line=line.strip().split(',')
+    a.append(line)
+for list in a:
+    if num<6:
+        num+=1
+        continue
+    else:
+        b.append(list)
+for i in b:
+        try:
+                if i[0][2:5]=='row':
+                        break
+        except:
+                continue
+#       print(type(i))
+        c.append(i)
+print(c)
+n=np.array(c)
+np.savetxt('abc.txt',n,fmt='%s',delimiter=',')
+
+
+
+
+
+-----------------
+#!/bin/bash
+a=$(cat abc.txt)
+for i in $a
+do
+hbase shell << EOF
+scan '$i'
+EOF
+done
+----------------
+
+#!/usr/local/bin/python3
+import sys
+import numpy as np
+import time
+import os
+a=[]
+b=[]
+c=[]
+num=0
+path='/home/hadoop/b.txt'
+for line in sys.stdin:
+    line=line.strip().split(',')
+    a.append(line)
+for list in a:
+    if num<6:
+        num+=1
+        continue
+    else:
+        b.append(list)
+for i in b:
+        try:
+                if i[0][2:5]=='row':
+                        break
+        except:
+                continue
+#       print(type(i))
+#       c.append(i)
+        c.append(i[0][9:])
+        c.append(i[2][7:])
+print(c)
+n=np.array(c)
+np.savetxt('abc.txt',n,fmt='%s',delimiter=',')
+
+

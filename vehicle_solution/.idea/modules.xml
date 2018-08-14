@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D:/company/代码/python代码/con_mongo/.idea/con_mongo.iml" filepath="D:/company/代码/python代码/con_mongo/.idea/con_mongo.iml" />
+      <module fileurl="file://D:/company/代码/python代码/con_mysql/.idea/con_mysql.iml" filepath="D:/company/代码/python代码/con_mysql/.idea/con_mysql.iml" />
+      <module fileurl="file://D:/company/代码/python代码/nev-3/.idea/nev-3.iml" filepath="D:/company/代码/python代码/nev-3/.idea/nev-3.iml" />
+      <module fileurl="file://D:/company/代码/python代码/nev-4/.idea/nev-4.iml" filepath="D:/company/代码/python代码/nev-4/.idea/nev-4.iml" />
+      <module fileurl="file://D:/company/代码/python代码/realtime/.idea/realtime.iml" filepath="D:/company/代码/python代码/realtime/.idea/realtime.iml" />
+      <module fileurl="file://D:/company/代码/python代码/test/.idea/test.iml" filepath="D:/company/代码/python代码/test/.idea/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vehicle_solution.iml" filepath="$PROJECT_DIR$/.idea/vehicle_solution.iml" />
+    </modules>
+  </component>
+</project>

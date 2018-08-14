@@ -1,0 +1,72 @@
+#!/usr/bin/python
+import binascii
+import pymysql
+import datetime
+
+def con_mysql(sql):
+    conn = pymysql.connect(host='10.2.23.8', port=4300, user='root', passwd='dangerous',db='raw_data_storage')
+    cur = conn.cursor()
+    # sql = "insert into raw_data(id,VIN,packet_time,raw,send_time) values('%s','%s','%s','%s','%s')" % (id_1, VIN, pack_time_1, raw_1, pack_time_2)
+    cur.execute(sql)
+    # li=[]
+    # # print(cur.fetchall())
+    # for r in cur.fetchall():
+    #         li.append(r)
+    #         print(r)
+    #         #cur.close()
+    # print li
+    conn.commit()
+    conn.close()
+
+def read_file(file_name):
+    id=5000000
+    with open(file_name, 'r') as f:
+        for line in f.readlines():
+            hex_data = line
+            vin = get_packet_vin(hex_data)
+            send_packet_time=get_packet_time(hex_data)
+            raw_data=get_hex_data(hex_data)
+            # print raw_data
+            this_packet_time = packet_time(raw_data[48:60])
+            # this_packet_time=send_packet_time
+
+            # result_data=str(count)+','+str(vin)+','+str(this_packet_time)+','+str(raw_data)+','+str(send_packet_time)
+            #            save_file(save_path, result_data)
+            # print result_data
+            sql = "insert into raw_data(id,VIN,packet_time,raw,send_time) values('%s','%s','%s','%s','%s')" % (id, vin, this_packet_time, raw_data, send_packet_time)
+            con_mysql(sql)
+            print id
+            id+=1
+
+# return result_data
+
+def get_hex_data(str_data):
+    temp_hex_data = str_data.replace(' ', '')
+    hex_data = temp_hex_data.replace('\n', '')
+    return hex_data[37:]
+
+def get_packet_vin(hex_data):
+    return hex_data[0:17]
+
+def packet_time(hex_data):
+    year = int(hex_data[0:2], 16)
+    month = int(hex_data[2:4], 16)
+    day = int(hex_data[4:6], 16)
+    hour = int(hex_data[6:8], 16)
+    minute = int(hex_data[8:10], 16)
+    second = int(hex_data[10:12], 16)
+    packet_time = '20{0}-{1:0>2d}-{2:0>2d} {3:0>2d}:{4:0>2d}:{5:0>2d}'.format(year, month, day, hour, minute, second)
+    return packet_time
+
+def get_packet_time(hex_data):
+    return hex_data[18:37]
+
+def save_file(path, context):
+    with open(path, 'a') as f:
+        f.write(context)
+
+
+if __name__ == '__main__':
+    # save_path='D:\\application_program\\python\\hbase.txt'
+    file_name='D:\\application_program\\python\\abc.txt'
+    read_file(file_name)

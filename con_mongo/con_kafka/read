@@ -1,0 +1,8 @@
+#coding=utf8
+from pykafka import KafkaClient
+
+client = KafkaClient(hosts="10.2.23.8:10000") # 可接受多个Client这是重点
+client.topics  # 查看所有topic
+topic = client.topics['my.test'] # 选择一个topic
+producer = topic.get_producer()
+producer.produce(['test message ' + str(i ** 2) for i in range(4)]) # 加了个str官方的例子py2.7跑不过

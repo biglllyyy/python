@@ -1,0 +1,19 @@
+或者使用字典连接数据库
+import pymysql.cursors
+
+config = {
+          'host':'127.0.0.1',
+          'port':3306,
+          'user':'root',
+          'password':'zhyea.com',
+          'db':'employees',
+          'charset':'utf8mb4',
+          'cursorclass':pymysql.cursors.DictCursor,
+          }
+
+# Connect to the database
+connection = pymysql.connect(**config)
+-----------------------------------------------
+
+插入语句的时候需要主句%s需要写成‘’（目前python2.7是这样的）
+# sql = "insert into raw_data(id,VIN,packet_time,raw,send_time) values('%s','%s','%s','%s','%s')"%(id, vin, this_packet_time, raw_data, send_packet_time)
